@@ -89,20 +89,12 @@ the preprocessor will stop with an error message.</p>
 <p>The runtime parameter <code>NPROMA</code> should be set to a value not greater than 128.
 This allows for optimal memory allocation and performance on the GPU.</p>
 
-<p>Each CPU process that offloads to GPU requires a chunk of the GPU VRAM memory,
-dependent on the number of species and reaction constants in the MECCA mechanism. 
-The number of GPUs per node and VRAM memory available in each GPU dictates the
-total number of CPU cores that can run simultaneously.</p>
-
 <p>Warning: When running multiple CPU processes per GPU, if
 memory is not enough the CUDA runtime will fail silently - without any
-error. A solution in that case is to use the Multi-process service provided
+error. A solution in that case is to use the Multi-process service (MPS) provided
 by NVIDIA as an alternative.</p>
 
-<p>During experiments with an engineering sample of the next generation 
-NVIDIA Pascal architecture, the source application will fail due to 
-large local memory requirements. Transforming runtime GPU local access to global 
-solves the problem, at a performance cost.</p>
+<p>No issues reported with the latest generation of NVIDIA Pascal architectures.</p>
 
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
