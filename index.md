@@ -8,12 +8,13 @@ is provided for production simulations.*
 
 ## 1. Requirements:
 
-###Software: 
+### Software: 
 CUDA compiler and python are required for the processor;
+
 [EMAC](http://www.messy-interface.org/) (ECHAM/MESSy) Earth System Model.
          
-###Hardware: 
-CUDA compatible GPU. 
+### Hardware: 
+ CUDA compatible GPU (Fermi, Kepler, Pascal, Volta, or later).
 
 ## 2. Installation:
 
@@ -40,7 +41,6 @@ the following files to be in place:
 *     messy/smcl/specific.mk
 *     messy/smcl/Makefile.m
  
-
 If any of these files is missing or not configured as in the MESSy release,
 the preprocessor will stop with an error message.
 
@@ -63,6 +63,23 @@ During experiments with an engineering sample of the next generation
 NVIDIA Pascal architecture, the source application will fail due to 
 large local memory requirements. Transforming runtime GPU local access to global 
 solves the problem, at a performance cost.
+
+## 5. Unit testing
+
+A self-contained unit test is included in the ditribution. The test includes 
+reference source files implementing a simplified chemistry mechanism and 
+compiles, exexutes and compares the FORTRAN (using gfortran) 
+and auto-generated CUDA versions.
+
+The test is executed by sourcing `driver.sh` under the `tests` directory. 
+A utility script that compares the test solver output is also included in `tests/compare.py`
+
+## 6. References
+
+Alvanos, M. and Christoudias, T.: GPU-accelerated atmospheric chemical kinetics in the ECHAM/MESSy (EMAC) Earth system model (version 2.52), Geosci. Model Dev., 10, 3679-3693, https://doi.org/10.5194/gmd-10-3679-2017, 2017. 
+
+Alvanos, M. and Christoudias, T., 2017. MEDINA: MECCA Development in Accelerators – KPP Fortran to CUDA source-to-source Pre-processor. Journal of Open Research Software, 5(1), p.13. DOI: http://doi.org/10.5334/jors.158
+
 
 ### Authors and Contributors
 For assistance or to report problems please contact the maintainers:
