@@ -34,35 +34,31 @@ You have to enter the `./messy/util directory` to execute the
 preprocessor, by running "`python f2c_alpha.py`". The preprocessor expects
 the following files to be in place:
 
-*     messy/smcl/messy_mecca_kpp.f90
-*     messy/smcl/messy_cmn_photol_mem.f90
-*     messy/smcl/messy_main_constants_mem.f90
-*     messy/util/kpp_integrate_cuda_prototype.cu
-*     messy/smcl/specific.mk
-*     messy/smcl/Makefile.m
+* `messy/smcl/messy_mecca_kpp.f90`
+* `messy/smcl/messy_cmn_photol_mem.f90`
+* `messy/smcl/messy_main_constants_mem.f90`
+* `messy/util/kpp_integrate_cuda_prototype.cu`
+* `messy/smcl/specific.mk`
+* `messy/smcl/Makefile.m`
  
 If any of these files is missing or not configured as in the MESSy release,
 the preprocessor will stop with an error message.
 
 ## 4. Running EMAC with GPU MECCA and improving performance:
 
-The runtime parameter `NPROMA` should be set to a value not greater than 128.
-This allows for optimal memory allocation and performance on the GPU.
+During testing it was found that the runtime parameter `NPROMA` should be set 
+to a value not greater than 128 for optimal memory allocation and performance on the GPU.
 
 Each CPU process that offloads to GPU requires a chunk of the GPU VRAM memory,
 dependent on the number of species and reaction constants in the MECCA mechanism. 
 The number of GPUs per node and VRAM memory available in each GPU dictates the
 total number of CPU cores that can run simultaneously.
 
-Warning: When running multiple CPU processes per GPU, if
-memory is not enough the CUDA runtime will fail silently - without any
-error. A solution in that case is to use the Multi-process service provided
-by NVIDIA as an alternative.
+To run multiple CPU processes per GPU, the Multi-process service (MPS) provided 
+by NVIDIA can be used.
 
-During experiments with an engineering sample of the next generation 
-NVIDIA Pascal architecture, the source application will fail due to 
-large local memory requirements. Transforming runtime GPU local access to global 
-solves the problem, at a performance cost.
+Warning: In K80 and older generation accelerators, if memory is not enough
+the CUDA runtime will fail silently - without any error. 
 
 ## 5. Unit testing
 
